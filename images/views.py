@@ -166,3 +166,15 @@ def add_comment(request,pk):
     else:
         form = CommentForm()
         return render(request,'comment.html',{"user":current_user,"comment_form":form})
+
+@login_required(login_url="/accounts/login/")
+def like(request,operation,pk):
+    image = get_object_or_404(Image,pk=pk)
+
+    if operation == 'like':
+        image.likes += 1
+        image.save()
+    elif operation =='unlike':
+        image.likes -= 1
+        image.save()
+    return redirect('home')

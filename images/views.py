@@ -49,7 +49,7 @@ def activate(request, uidb64, token):
         current_user.save()
         login(request, current_user)
         # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. <a href="https://instapichas.herokuapp.com"> Login </a> Now you can login your account.')
+        return HttpResponse('Thank you for your email confirmation. <a> Login </a> Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
 
@@ -76,7 +76,7 @@ def home(request):
 @login_required
 def profile(request,profile_id):
 
-    profile = Profile.objects.get(pk = profile_id)
+    profile = Profile.objects.get(user_id = profile_id)
     images = Image.objects.filter(profile_id=profile).all()
 
     return render(request,"profile.html",{"profile":profile,"images":images})

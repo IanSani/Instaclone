@@ -97,3 +97,23 @@ def search_results(request):
     else:
         message = "You haven't searched for any user"
         return render(request,'search.html',{"message":message})
+
+@login_required(login_url='/accounts/login/')
+def get_image_by_id(request,image_id):
+
+    image = Image.objects.get(id = image_id)
+    comment = Image.objects.filter(id = image_id).all()
+
+    current_user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.posted_by = current_user
+            image.save()
+        return redirect('home')
+
+    else:
+        form = CommentForm()
+
+    return render(request,"image.html", {"image":image,"comment":comment,"form": form})

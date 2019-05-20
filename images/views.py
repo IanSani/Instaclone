@@ -117,3 +117,18 @@ def get_image_by_id(request,image_id):
         form = CommentForm()
 
     return render(request,"image.html", {"image":image,"comment":comment,"form": form})
+
+@login_required(login_url='/accounts/login/')
+def add_profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return redirect('home')
+
+    else:
+        form = NewProfileForm()
+    return render(request, 'new_profile.html', {"form": form})

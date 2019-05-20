@@ -20,3 +20,19 @@ class Profile(models.Model):
     def find_profile(cls,search_term):
         profile = Profile.objects.filter(user__username__icontains=search_term)
         return profile
+
+class Image(models.Model):
+    posted_by = models.ForeignKey(User, null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)
+    insta_image = models.ImageField(upload_to='picha/',null=True)
+    caption = models.TextField(null=True)
+    likes = models.PositiveIntegerField(default=0)
+
+
+    @classmethod
+    def get_images(cls):
+        images = Image.objects.all()
+        return images
+
+    def __str__(self):
+       return str(self.caption)

@@ -56,7 +56,7 @@ Admin should:
 * In your terminal:
 
         $ git clone https://github.com/IanSani/Instaclone
-        $ cd Instrapicha
+        $ cd Instaclone
 
 ## Running the Application
 * Creating the virtual environment

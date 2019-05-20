@@ -1,0 +1,7 @@
+Hello {{user}},
+
+Welcome to the Instaclone. Enjoy posting photos and following your best friends.
+Thank you!
+
+Regards,
+<i class="fab fa-instagram "></i> | INSTACLONE</a>
